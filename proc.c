@@ -6,6 +6,7 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
+#include "uproc.h"
 
 struct {
   struct spinlock lock;
@@ -532,3 +533,65 @@ procdump(void)
     cprintf("\n");
   }
 }
+
+
+//Syscall getptable
+struct proc * getptable_proc(void){
+  return ptable.proc;
+}
+
+int getppid(){
+  return ptable.proc->parent->pid;
+}
+
+// ------------------------------------------------------
+// user defined: getprocinfo() syscall
+// int getprocinfo(int pid, struct uproc *up)
+// {
+//   // from procdump(void)
+//   static char *states[] = {
+//   [UNUSED]    "unused",
+//   [EMBRYO]    "embryo",
+//   [SLEEPING]  "sleep ",
+//   [RUNNABLE]  "runble",
+//   [RUNNING]   "run   ",
+//   [ZOMBIE]    "zombie"
+//   };
+
+//   struct proc *p;
+//   acquire(&ptable.lock);
+
+//   for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
+
+//     if (p->pid == pid)
+//       memset((char*)up, 0, sizeof(struct uproc));
+    
+//     safestrcpy(up->name, p->name, sizeof(up->name));
+//     up->pid = p->pid;
+
+//     if (p->pid == 1)
+//       up->ppid = 0;
+//     else
+//       up->ppid = p->parent->pid;
+    
+//     up->sz = p->sz;
+
+//     if (p->state >= 0 && p->state < NELEM(states) && states[p->state])
+//       safestrcpy(up->state, states[p->state], sizeof(up->state));
+//     else
+//       safestrcpy(up->state, "???", sizeof(up->state));
+    
+//     release(&ptable.lock);
+//     return 0;
+
+//   }
+
+//   release(&ptable.lock);
+//   return -1;
+// }
+
+
+// int getnextpid(void)
+// {
+//   return nextpid;
+// }
