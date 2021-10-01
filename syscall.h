@@ -25,3 +25,4 @@
 // #define SYS_getnextpid 24
 #define SYS_getptable 23
 #define SYS_getppid 24
+#define SYS_history 25
