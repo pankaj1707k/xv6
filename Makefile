@@ -181,9 +181,9 @@ UPROGS=\
 	_usertests\
 	_wc\
 	_zombie\
-    _hello\
-    _mycp\
-    _test_getyear\
+        _hello\
+        _mycp\
+        _test_getyear\
 	_ps\
 	_history\
 
